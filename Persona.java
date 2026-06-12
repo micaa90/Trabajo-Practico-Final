@@ -14,17 +14,23 @@ public abstract class Persona {
 
     /**
      * Constructor base para inicializar los datos comunes de una persona.
-     * * @param dni El número de documento de identidad (sin puntos).
+     * @param dni El número de documento de identidad (sin puntos).
      * @param nombre El nombre completo de la persona.
      */
     public Persona(Integer dni, String nombre) {
+        if (dni == null || dni <= 0) {
+            throw new IllegalArgumentException("Error: El DNI debe ser un número entero mayor a cero.");
+        }
+        if (nombre == null || nombre.trim().isEmpty()) {
+            throw new IllegalArgumentException("Error: El nombre de la persona no puede estar vacío ni apuntar a null.");
+        }
         this.dni = dni;
         this.nombre = nombre;
     }
 
     /**
      * Obtiene el DNI de la persona.
-     * * @return El número de DNI encapsulado.
+     * @return El número de DNI encapsulado.
      */
     public Integer getDni() {
         return dni;
@@ -32,7 +38,7 @@ public abstract class Persona {
 
     /**
      * Obtiene el nombre de la persona.
-     * * @return El nombre encapsulado.
+     * @return El nombre encapsulado.
      */
     public String getNombre() {
         return nombre;
