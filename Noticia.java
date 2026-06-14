@@ -1,4 +1,4 @@
-package Trabajo-Practico-Final;
+
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ public class Noticia implements IExportable {
             throw new IllegalArgumentException("Error: Los datos de la fecha no pueden ser nulos.");
         }
         // si los números son ilógicos (32/13/2026), Java lanza automáticamente una DateTimeException.
-        Localdate fechaIngresada = LocalDate.of(anio, mes, dia);
+        LocalDate fechaIngresada = LocalDate.of(anio, mes, dia);
         if (fechaIngresada.isAfter(LocalDate.now())) {
             throw new IllegalArgumentException("Error de lógica: La fecha de la noticia (" + fechaIngresada + ") no puede ser posterior al día de hoy.");
         }
@@ -59,6 +59,10 @@ public class Noticia implements IExportable {
 
     public LocalDate getFecha() {
         return fecha;
+    }
+
+    public Autor getAutor() {
+        return autor;
     }
     /**
      * Delega a la noticia la responsabilidad de administrar sus propios comentarios.
