@@ -9,7 +9,7 @@ import java.time.*;
  * @author Gimenez Micaela, Garcia Ayelen, Petrangeli Dylan
  * @version 1.0
  */
-public class PortaIDeNoticias {
+public class PortalDeNoticias {
 
     private HashMap<Integer, Autor> autores;
     private HashMap<Integer, Lector> lectores;
@@ -19,7 +19,7 @@ public class PortaIDeNoticias {
      * Constructor por defecto del Portal de Noticias.
      * Inicializa las estructuras de datos (HashMaps y ArrayList) para comenzar la carga.
      */
-    public PortaIDeNoticias(){
+    public PortalDeNoticias(){
         this.autores = new HashMap<>();
         this.lectores = new HashMap<>();
         this.noticias = new ArrayList<>();
@@ -85,15 +85,12 @@ public class PortaIDeNoticias {
      * @throws IllegalArgumentException Si alguno de los argumentos de entrada es inválido o nulo.
      */
     public void publicarNoticia(String titulo, String detalle, Integer dia, Integer mes, Integer anio, Integer dniAutor){
-        if(titulo == null || titulo.trim().isEmpty()) throw new IllegalArgumentException("Error: el titulo no puede estar vacio");
-        if(detalle == null || detalle.trim().isEmpty()) throw new IllegalArgumentException("Error: el detalle no puede estar vacio");
-        if(dia == null || mes == null || anio == null) throw new IllegalArgumentException("Error: la fecha no puede tener campos vacios");
         if(dniAutor == null || dniAutor < 0) throw new IllegalArgumentException("Error: el dni del autor no puede ser nulo o negativo");
 
         Autor autor = this.autores.get(dniAutor); // verifico que exista el autor y si existe me da sus datos
         if(autor == null) throw new IllegalArgumentException("Error: autor no registrado");
 
-        Noticia noticia = new Noticia(titulo, detalle, dia, mes, anio, autor);
+        Noticia noticia = new Noticia(titulo, detalle, dia, mes, anio, autor);// Noticia lanza sus propias excepciones
         this.noticias.add(noticia);
     }
 
@@ -107,8 +104,7 @@ public class PortaIDeNoticias {
      * @throws NoticiaInexistenteException Si se recorre la lista completa y ninguna noticia coincide con el título buscado.
      * @throws IllegalArgumentException Si el lector no existe o los parámetros son inválidos.
      */
-    public void comentarNoticia(Integer numero, String texto, String tituloNoticia, Integer dniLector)  throws NoticiaInexistenteException{
-        if(numero == null || numero < 0) throw new IllegalArgumentException("Error: el numero no puede ser nulo o negativo");
+    public void comentarNoticia(String texto, String tituloNoticia, Integer dniLector)  throws NoticiaInexistenteException{
         if(texto == null || texto.trim().isEmpty()) throw new IllegalArgumentException("Error: el texto no puede ser nulo");
         if(dniLector == null || dniLector < 0) throw new IllegalArgumentException("Error: el DNI del lector no puede ser nulo o negativo");
         if(tituloNoticia == null || tituloNoticia.trim().isEmpty()) throw new IllegalArgumentException("Error: el titulo de noticia a comentar no puede estar vacio");
@@ -126,7 +122,7 @@ public class PortaIDeNoticias {
 
         if(noticiaEncontrada == null) throw new IllegalArgumentException("Error: noticia no encontrada");
         
-        noticiaEncontrada.agregarComentario(new Comentario(numero, texto, lector));
+        noticiaEncontrada.agregarComentario(new Comentario(texto, lector));
     }
 
     /**
@@ -244,9 +240,9 @@ public class PortaIDeNoticias {
                 // Formato: "Dni ;  Nombre ; Medio"
                 String[] partes = linea.split(";"); 
                 
-                Integer dni = Integer.parseInt(partes[1]);
-                String nombre = partes[2];
-                String medio = partes[3];
+                Integer dni = Integer.parseInt(partes[0]);
+                String nombre = partes[1];
+                String medio = partes[2];
                 
                 this.autores.put(dni, new Autor(dni, nombre, medio));
             }
@@ -261,9 +257,9 @@ public class PortaIDeNoticias {
                 // Formato: "Dni ; Nombre ; Edad"
                 String[] partes = linea.split(";");
                 
-                Integer dni = Integer.parseInt(partes[1]);
-                String nombre = partes[2];
-                Integer edad = Integer.parseInt(partes[3]);
+                Integer dni = Integer.parseInt(partes[0]);
+                String nombre = partes[1];
+                Integer edad = Integer.parseInt(partes[2]);
                 
                 this.lectores.put(dni, new Lector(dni, nombre, edad));
             }
@@ -278,12 +274,12 @@ public class PortaIDeNoticias {
                 // Formato: "Titulo ;Detalle ; año/mes/dia ; dni"
                 String[] partes = linea.split(";");
                 
-                String titulo = partes[1];
-                String detalle = partes[2];
-                Integer anio = Integer.parseInt(partes[3]);
-                Integer mes = Integer.parseInt(partes[4]);
-                Integer dia = Integer.parseInt(partes[5]);
-                Integer dniAutor = Integer.parseInt(partes[6]);
+                String titulo = partes[0];
+                String detalle = partes[1];
+                Integer anio = Integer.parseInt(partes[2]);
+                Integer mes = Integer.parseInt(partes[3]);
+                Integer dia = Integer.parseInt(partes[4]);
+                Integer dniAutor = Integer.parseInt(partes[5]);
                 
                 Autor autorResponsable = this.autores.get(dniAutor);
                 

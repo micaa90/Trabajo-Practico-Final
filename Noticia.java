@@ -1,4 +1,4 @@
-
+package Trabajo-Practico-Final;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -60,19 +60,26 @@ public class Noticia implements IExportable {
     public LocalDate getFecha() {
         return fecha;
     }
-
     public Autor getAutor() {
         return autor;
     }
     /**
      * Delega a la noticia la responsabilidad de administrar sus propios comentarios.
-     * * @param comentario El objeto Comentario que se va a vincular a esta noticia.
+     * @param texto La descripcion del comentario que se asociara a la noticia.
+     * @param lector El objeto que contiene la identidad del lector que realiza el comentario.
      */
-    public void agregarComentario(Comentario comentario) {
-        if (comentario == null) {
-            throw new NullPointerException("Error: No se puede agregar un comentario nulo.");
+    public void agregarComentario(String texto, Lector lector) {
+        if (texto == null || texto.trim().isEmpty()) {
+            throw new IllegalArgumentException("Error: El texto del comentario no puede estar vacío.");
         }
-        this.comentarios.add(comentario);
+        if (lector == null) {
+            throw new NullPointerException("Error: No se puede asociar un comentario sin un lector válido.");
+        }
+        
+        int numeroComentario = this.comentarios.size() + 1; 
+        
+        Comentario nuevoComentario = new Comentario(numeroComentario, texto, lector);
+        this.comentarios.add(nuevoComentario);
     }
 
     /**
