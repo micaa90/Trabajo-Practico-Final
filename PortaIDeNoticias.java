@@ -122,7 +122,7 @@ public class PortalDeNoticias {
 
         if(noticiaEncontrada == null) throw new IllegalArgumentException("Error: noticia no encontrada");
         
-        noticiaEncontrada.agregarComentario(new Comentario(texto, lector));
+        noticiaEncontrada.agregarComentario(texto, lector);
     }
 
     /**

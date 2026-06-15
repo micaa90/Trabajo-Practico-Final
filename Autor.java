@@ -18,6 +18,9 @@ public class Autor extends Persona implements IExportable {
      */
     public Autor(Integer dni, String nombre, String medio) {
         super(dni, nombre); 
+        if (medio == null || medio.trim().isEmpty()) {
+            throw new IllegalArgumentException("Error: EL medio del autor no puede ser nulo ni estar vacio.");
+        }
         this.medio = medio;
     }
 

@@ -1,5 +1,4 @@
 package Trabajo-Practico-Final;
-
 /**
  * Clase que representa un comentario en una publicación.
  * @author Garcia Ayelen, Gimenez Micaela, Petrangeli Dylan.
@@ -51,9 +50,23 @@ public class Comentario implements IExportable{
 		return lector;
 	}
 
+    /**
+     * Cumple con la implementacion del metodo de la interfaz IExportable.
+     * Genera un String con los datos del autor separados por punto y coma (;) 
+     * listo para ser insertado directamente en el archivo .txt.
+     * @return Cadena de texto formateada para el guardado.
+     */
 	@Override
     public String generarLineaArchivo(){
         return getNumero() + ";" + getTexto() + ";" + getLector();
     }
+
+    /** 
+     * Método para mostrar por consola un comentario con formato.
+     * @return El número de comentario, el lector que lo publicó y el comentario textual.
+    */
+	public String mostrarComentario() {
+		return getNumero() + ") " + getLector().getNombre() + "ha comentado: " + getTexto();
+	}
     
 }
