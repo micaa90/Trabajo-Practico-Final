@@ -1,4 +1,4 @@
-package Trabajo-Practico-Final;
+
 
 /**
  * Clase que representa a un periodista o creador de contenido dentro del portal.
@@ -43,6 +43,6 @@ public class Autor extends Persona implements IExportable {
      */
     @Override
     public String generarLineaArchivo() {
-        return getDni() + ";" + getNombre() + ";" + this.medio;
+        return getDni() + " / " + getNombre() + " / " + this.medio;
     }
 }

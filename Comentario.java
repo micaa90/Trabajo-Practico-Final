@@ -1,4 +1,4 @@
-package Trabajo-Practico-Final;
+
 /**
  * Clase que representa un comentario en una publicación.
  * @author Garcia Ayelen, Gimenez Micaela, Petrangeli Dylan.
@@ -58,7 +58,7 @@ public class Comentario implements IExportable{
      */
 	@Override
     public String generarLineaArchivo(){
-        return getNumero() + ";" + getTexto() + ";" + getLector();
+        return getNumero() + " / " + getTexto() + " / " + getLector();
     }
 
     /** 

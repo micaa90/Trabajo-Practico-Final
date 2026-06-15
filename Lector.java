@@ -1,4 +1,4 @@
-package Trabajo-Practico-Final;
+
 
 /**
  * Clase que representa un usuario de la plataforma que solamente consume el contenido de la misma.
@@ -6,8 +6,6 @@ package Trabajo-Practico-Final;
  * @version 1.0
  */
 public class Lector extends Persona implements IExportable{
-    private Integer dni;
-    private String nombre;
     private Integer edad;
     
     /**
@@ -35,7 +33,7 @@ public class Lector extends Persona implements IExportable{
      * Imprime su DNI, Nombre y Edad.
      */
     public void mostrarPerfil() {
-        System.out.println("AUTOR | DNI: " + getDni() + 
+        System.out.println("LECTOR | DNI: " + getDni() + 
                            " | Nombre: " + getNombre() + 
                            " | Edad: " + getEdad());
     }
@@ -48,6 +46,6 @@ public class Lector extends Persona implements IExportable{
      */
     @Override
     public String generarLineaArchivo(){
-        return getNombre() + ";" + getDni() + ";" + getEdad();
+        return getDni() + " / " + getNombre() + " / " + getEdad();
     }
 }
