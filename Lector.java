@@ -48,6 +48,6 @@ public class Lector extends Persona implements IExportable{
      */
     @Override
     public String generarLineaArchivo(){
-        return getNombre() + ";" + getDni() + ";" + getEdad();
+        return getDni()+ ";" + getNombre() + ";" + getEdad();
     }
 }
