@@ -58,7 +58,7 @@ public class Comentario implements IExportable{
      */
 	@Override
     public String generarLineaArchivo(){
-        return getNumero() + ";" + getTexto() + ";" + getLector().getNombre();
+        return getNumero() + " / " + getTexto() + " / " + getLector().getNombre();
     }
 
     /** 
