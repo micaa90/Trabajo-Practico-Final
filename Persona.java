@@ -1,4 +1,3 @@
-package Trabajo-Practico-Final;
 
 /**
  * Clase abstracta que representa a un individuo genérico dentro del sistema.

@@ -1,4 +1,3 @@
-package Trabajo-Practico-Final;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
