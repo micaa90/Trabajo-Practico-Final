@@ -63,15 +63,14 @@ public class PortalDeNoticias {
         if(nombre == null || nombre.trim().isEmpty()) throw new IllegalArgumentException("Error: no puede estar vacio el nombre");
         if(edad == null || edad < 0) throw new IllegalArgumentException("Error: no puede estar vacia la edad");
 
-        for (Lector l : this.lectores.values()) {
-            if(l.getDni() == dni){
-                throw new DniDuplicadoException("Error: el lector ya esta registrado");
-            }
+        if(this.lectores.containsKey(dni)){
+            throw new DniDuplicadoException("Error: el lector con DNI " + dni + " ya esta registrado");
         }
         
         Lector nuevoLector = new Lector(dni, nombre, edad);
         this.lectores.put(dni, nuevoLector);
     }
+
 
     /**
      * Da de alta y publica un nuevo artículo periodístico en el portal.
@@ -225,6 +224,19 @@ public class PortalDeNoticias {
         guardarLista(this.autores.values(), "autores.txt");
         guardarLista(this.lectores.values(), "usuarios.txt");
         guardarLista(this.noticias, "noticias.txt");
+
+        try (PrintWriter escritor = new PrintWriter(new FileWriter("comentarios.txt"))) {
+            for (Noticia n : this.noticias) {
+
+                for (Comentario c : n.getComentarios()) {
+                    // Formato: TituloNoticia / Texto / DniLector
+                    escritor.println(n.getTitulo() + " / " + c.getTexto() + " / " + c.getLector().getDni());
+                }
+            }
+            System.out.println("Archivo 'comentarios.txt' guardado con exito.");
+        } catch (IOException e) {
+            System.err.println("Error al guardar comentarios: " + e.getMessage());
+        }
     }
 
     /**
@@ -298,6 +310,34 @@ public class PortalDeNoticias {
             System.out.println("Noticias cargadas con éxito.");
         } catch (IOException e) {
             System.out.println("Aviso: No se pudo cargar noticias.txt.");
+        }
+
+        try (BufferedReader lector = new BufferedReader(new FileReader("comentarios.txt"))) {
+            String linea;
+            while ((linea = lector.readLine()) != null) {
+                String[] partes = linea.split(" / ");
+                
+                String tituloNoticia = partes[0].trim();
+                String texto = partes[1].trim();
+                Integer dniLector = Integer.parseInt(partes[2].trim());
+                
+                //Recuperamos al lector que hizo el comentario
+                Lector lectorEncontrado = this.lectores.get(dniLector);
+                
+                if (lectorEncontrado != null) {
+                    //Buscamos a qué noticia iba dirigido
+                    for (Noticia n : this.noticias) {
+                        if (n.getTitulo().equalsIgnoreCase(tituloNoticia)) {
+                            //Lo agregamos
+                            n.agregarComentario(texto, lectorEncontrado);
+                            break; 
+                        }
+                    }
+                }
+            }
+            System.out.println("Comentarios cargados con éxito.");
+        } catch (IOException e) {
+            System.out.println("Aviso: No se pudo cargar comentarios.txt (puede que sea tu primera vez guardando).");
         }
     }
 
