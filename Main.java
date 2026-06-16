@@ -1,4 +1,4 @@
-package Trabajo-Practico-Final;
+
 import java.util.*;
 import java.time.LocalDate;
 
@@ -136,9 +136,10 @@ public class Main {
                         System.out.println("¡Gracias por usar el Portal de Noticias!");
                         break;
                     }
-                    default:
+                    default:{
                         System.out.println("La opcion ingresada no es valida. Por favor, intente de nuevo.");
                         break;
+                    }
                 }
             } catch (NumberFormatException e) {
                 // Atrapa si el usuario escribe letras en lugar de números en el menú o fechas
@@ -154,3 +155,4 @@ public class Main {
 
         teclado.close();
     }
+}
