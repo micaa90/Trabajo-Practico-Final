@@ -111,11 +111,7 @@ public class Noticia implements IExportable {
      * * @return Cadena de texto formateada para el guardado.
      */
     @Override
-public String generarLineaArchivo() {
-    return this.titulo + " / " + this.detalle + " / " + 
-           this.fecha.getYear() + " / " + 
-           this.fecha.getMonthValue() + " / " + 
-           this.fecha.getDayOfMonth() + " / " + 
-           this.autor.getNombre();
-}
+    public String generarLineaArchivo() {
+        return this.titulo + " / " + this.detalle +  " / " +  this.fecha.toString() + " / " + this.autor.getNombre();
+    }
 }
