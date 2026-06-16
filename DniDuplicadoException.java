@@ -1,4 +1,4 @@
-package Trabajo-Practico-Final;
+
 
 /**
  * Excepción personalizada que se lanza cuando se intenta registrar 

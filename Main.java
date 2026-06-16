@@ -25,6 +25,7 @@ public class Main {
             System.out.println("0. Guardar datos y cerrar el sistema");
 
             try {
+                System.out.print("\n Ingrese la opcion que desea realizar: ");
                 opcion = Integer.parseInt(teclado.nextLine());
 
                 switch (opcion) {

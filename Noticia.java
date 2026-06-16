@@ -1,4 +1,4 @@
-package Trabajo-Practico-Final;
+
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -113,5 +113,9 @@ public class Noticia implements IExportable {
     @Override
     public String generarLineaArchivo() {
         return this.titulo + " / " + this.detalle +  " / " +  this.fecha.toString() + " / " + this.autor.getDni();
+    }
+
+    public ArrayList<Comentario> getComentarios() {
+        return this.comentarios;
     }
 }
