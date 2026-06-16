@@ -112,6 +112,6 @@ public class Noticia implements IExportable {
      */
     @Override
     public String generarLineaArchivo() {
-        return this.titulo + " / " + this.detalle +  " / " +  this.fecha.toString() + " / " + this.autor.getNombre();
+        return this.titulo + " / " + this.detalle +  " / " +  this.fecha.toString() + " / " + this.autor.getDni();
     }
 }
