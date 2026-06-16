@@ -65,8 +65,8 @@ public class Comentario implements IExportable{
      * Método para mostrar por consola un comentario con formato.
      * @return El número de comentario, el lector que lo publicó y el comentario textual.
     */
-	public String mostrarComentario() {
-		print("[#" + getNumero() + "] " + getLector().getNombre() + " ha comentado: " + getTexto());
-	}
+	public void mostrarComentario() {
+        System.out.println("  [#" + this.numero + "] " + this.lector.getNombre() + " ha comentado: " + this.texto);
+    }
     
 }
