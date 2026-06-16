@@ -1,4 +1,3 @@
-
 import java.util.*;
 import java.time.LocalDate;
 
@@ -137,6 +136,7 @@ public class Main {
                         System.out.println("¡Gracias por usar el Portal de Noticias!");
                         break;
                     }
+
                     default:{
                         System.out.println("La opcion ingresada no es valida. Por favor, intente de nuevo.");
                         break;

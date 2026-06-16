@@ -1,5 +1,4 @@
 
-
 /**
  * Clase abstracta que representa a un individuo genérico dentro del sistema.
  * Centraliza los datos comunes (DNI y nombre) para ser heredados por las 

@@ -1,5 +1,4 @@
 
-
 /**
  * Excepción personalizada que se lanza cuando un lector intenta 
  * interactuar con una noticia que no figura en el sistema.

@@ -1,5 +1,4 @@
 
-
 /**
  * Excepción personalizada que se lanza cuando se intenta registrar 
  * a un Autor o Lector con un DNI que ya existe en los registros del portal.

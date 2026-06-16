@@ -1,5 +1,4 @@
 
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -53,6 +52,10 @@ public class Noticia implements IExportable {
         comentarios = new ArrayList<>();
     }
 
+    public ArrayList<Comentario> getComentarios() {
+        return this.comentarios;
+    }
+    
     public String getTitulo() {
         return titulo;
     }
@@ -115,7 +118,4 @@ public class Noticia implements IExportable {
         return this.titulo + " / " + this.detalle +  " / " +  this.fecha.toString() + " / " + this.autor.getDni();
     }
 
-    public ArrayList<Comentario> getComentarios() {
-        return this.comentarios;
-    }
 }
