@@ -1,4 +1,4 @@
-package Trabajo-Practico-Final;
+
 /**
  * Clase que representa un comentario en una publicación.
  * @author Garcia Ayelen, Gimenez Micaela, Petrangeli Dylan.

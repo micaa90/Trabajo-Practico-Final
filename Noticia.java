@@ -1,4 +1,4 @@
-package Trabajo-Practico-Final;
+
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -111,6 +111,7 @@ public class Noticia implements IExportable {
      * * @return Cadena de texto formateada para el guardado.
      */
     @Override
+<<<<<<< HEAD
 public String generarLineaArchivo() {
     return this.titulo + ";" + this.detalle + ";" + 
            this.fecha.getYear() + ";" + 
@@ -118,4 +119,10 @@ public String generarLineaArchivo() {
            this.fecha.getDayOfMonth() + ";" + 
            this.autor.getDni();
 }
+=======
+    public String generarLineaArchivo() {
+        // Formato: Titulo ; Detalle ; YYYY-MM-DD ; dniAutor
+        return this.titulo + " / " + this.detalle + " / " + this.fecha.toString() + " / " + this.autor.getDni();
+    }
+>>>>>>> f79547fa4fe31532a12227be259386ced92cad39
 }

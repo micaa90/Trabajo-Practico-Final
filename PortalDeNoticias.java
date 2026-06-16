@@ -276,10 +276,15 @@ public class PortalDeNoticias {
                 
                 String titulo = partes[0];
                 String detalle = partes[1];
-                Integer anio = Integer.parseInt(partes[2]);
-                Integer mes = Integer.parseInt(partes[3]);
-                Integer dia = Integer.parseInt(partes[4]);
-                Integer dniAutor = Integer.parseInt(partes[5]);
+
+                LocalDate fechaParseada = LocalDate.parse(partes[2].trim());
+        
+                // Desglosamos la fecha parseada para poder pasársela al constructor de la clase Noticia
+                Integer anio = fechaParseada.getYear();
+                Integer mes = fechaParseada.getMonthValue();
+                Integer dia = fechaParseada.getDayOfMonth();
+                
+                Integer dniAutor = Integer.parseInt(partes[3]);
                 
                 Autor autorResponsable = this.autores.get(dniAutor);
                 
