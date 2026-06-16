@@ -52,6 +52,10 @@ public class Noticia implements IExportable {
         comentarios = new ArrayList<>();
     }
 
+    public ArrayList<Comentario> getComentarios() {
+        return this.comentarios;
+    }
+    
     public String getTitulo() {
         return titulo;
     }

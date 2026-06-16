@@ -63,10 +63,8 @@ public class PortalDeNoticias {
         if(nombre == null || nombre.trim().isEmpty()) throw new IllegalArgumentException("Error: no puede estar vacio el nombre");
         if(edad == null || edad < 0) throw new IllegalArgumentException("Error: no puede estar vacia la edad");
 
-        for (Lector l : this.lectores.values()) {
-            if(l.getDni() == dni){
-                throw new DniDuplicadoException("Error: el lector ya esta registrado");
-            }
+        if(this.lectores.containsKey(dni)){
+            throw new DniDuplicadoException("Error: el lector con DNI " + dni + " ya esta registrado");
         }
         
         Lector nuevoLector = new Lector(dni, nombre, edad);
@@ -225,6 +223,18 @@ public class PortalDeNoticias {
         guardarLista(this.autores.values(), "autores.txt");
         guardarLista(this.lectores.values(), "usuarios.txt");
         guardarLista(this.noticias, "noticias.txt");
+
+        // NUEVO: Guardamos los comentarios cruzando el Título de la noticia y el DNI del lector
+        try (PrintWriter writer = new PrintWriter(new FileWriter("comentarios.txt"))) {
+            for (Noticia n : this.noticias) {
+                for (Comentario c : n.getComentarios()) {
+                    // Formato: TituloNoticia / Texto / DniLector
+                    writer.println(n.getTitulo() + " / " + c.getTexto() + " / " + c.getLector().getDni());
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error al guardar comentarios: " + e.getMessage());
+        }
     }
 
     /**
@@ -299,7 +309,26 @@ public class PortalDeNoticias {
         } catch (IOException e) {
             System.out.println("Aviso: No se pudo cargar noticias.txt.");
         }
+
+        try (BufferedReader lector = new BufferedReader(new FileReader("comentarios.txt"))) {
+            String linea;
+            while ((linea = lector.readLine()) != null) {
+                String[] partes = linea.split(" / ");
+                String tituloNoticia = partes[0];
+                String texto = partes[1];
+                Integer dniLector = Integer.parseInt(partes[2]);
+                
+                try {
+                    comentarNoticia(texto, tituloNoticia, dniLector);
+                } catch (Exception e) {} 
+            }
+            System.out.println("Comentarios cargados con éxito.");
+        } catch (IOException e) {
+            System.out.println("Aviso: No se pudo cargar comentarios.txt.");
+        }
     }
+
+
 
     
 }
